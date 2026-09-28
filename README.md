@@ -24,7 +24,7 @@ xelatex main.tex
 
 `make` 编译示例 `homework.tex`。使用 [LaTeX Workshop](https://github.com/James-Yu/LaTeX-Workshop) 时，将配方设为 XeLaTeX。上传到 [Overleaf](https://www.overleaf.com) 时同样选择 XeLaTeX。
 
-只带走能编译的文件时运行 `python pack_sources.py`。它把 `main.tex`、`*.cls`、`*.bib` 和 `figures/` 中的校徽打成 `ucas-homework-src.zip`，不包含预览图与 PDF。
+只带走能编译的文件时运行 `python pack_sources.py`。它把 `main.tex`、`*.cls`、`*.bib`、`*.bst` 和 `figures/` 中的校徽打成 `ucas-homework-src.zip`，不包含预览图、示例 PDF 和 `homework.tex`。
 
 ## 样例
 
@@ -91,6 +91,18 @@ xelatex main.tex
 `\renewcommand{\questiontype}{练习}` 改变编号题前缀。`\setcounter{questionCounter}{9}` 使下一题为第 10 题。`\renewcommand{\writtensection}{5}` 后题号变为 5.1、5.2。`\section` 与 `\question` 等价，`\section*{标题}` 与 `\question*{标题}` 等价。
 
 `\answerbox{4cm}` 留出作答空白。`\tbox{文字}` 为浅灰提示框。定理环境为 `theorem`、`lemma`、`corollary`、`proposition`、`definition`、`example`，证明用 `proof`。
+
+题目中的表用 `threetab`，不要用浮动的 `table`。线只有 `\toprule`、`\midrule`、`\bottomrule`，没有竖线。
+
+```latex
+\begin{threetab}{lr}
+  词项 & 文档频率 df \\
+  \midrule
+  dragon & 66{,}000 \\
+\end{threetab}
+```
+
+参考文献按 [ACL LaTeX 模板](https://github.com/acl-org/acl-style-files) 的 `acl_natbib.bst` 排版，标题为「参考文献」。条目写在 `ref.bib`，文末写 `\bibliography{ref}`。引用用 `\citep` 与 `\citet`。没有引用时不必写这一行。
 
 ## 选项
 

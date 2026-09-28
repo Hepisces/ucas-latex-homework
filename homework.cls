@@ -149,6 +149,8 @@
 \RequirePackage{eso-pic}
 \RequirePackage{tikz}
 \RequirePackage{fancyhdr}
+\RequirePackage{natbib}
+\bibliographystyle{acl_natbib}
 \RequirePackage[
   unicode=true,
   colorlinks=true,
@@ -456,6 +458,27 @@
   \end{tcolorbox}%
 }
 
+% ----- 三线表 ---------------------------------------------------------------
+% 题目中的表用 threetab，不进入浮动体，因此不会漂到别的题。
+% 参数是列格式，不要加竖线。表头一行之后写 \midrule。
+% \begin{threetab}{lr}
+%   词项 & 文档频率 \\
+%   \midrule
+%   dragon & 66000 \\
+% \end{threetab}
+\newenvironment{threetab}[1]{%
+  \par\addvspace{0.45em}%
+  \noindent\begin{minipage}{\linewidth}%
+  \centering
+  \begin{tabular}{@{}#1@{}}%
+    \toprule
+}{%
+    \bottomrule
+  \end{tabular}%
+  \end{minipage}%
+  \par\addvspace{0.45em}%
+}
+
 % ----- 代码 -----------------------------------------------------------------
 \lstdefinestyle{hw}{
   basicstyle=\ttfamily\small,
@@ -518,5 +541,32 @@
   \hw@install@page
 }
 \AddToHook{begindocument/end}{\hw@install@section}
+\AddToHook{begindocument/end}{\hw@install@bibliography}
+
+% 参考文献标题用中文。本类把 \section 用作题目，因此不能走 \section*。
+% 条目版式按 ACL 的 acl_natbib.bst：作者-年，无编号，悬挂缩进。
+% 正文用 \citep、\citet；\cite 与 ACL 模板一样等于 \citep。
+% 文末写 \bibliography{ref}。没有引用时不必写。
+\newcommand{\hw@install@bibliography}{%
+  \renewcommand{\refname}{参考文献}%
+  \renewcommand{\cite}{\citep}%
+  \def\thebibliography##1{%
+    \par\addvspace{1.15em}%
+    \noindent{\bfseries\heiti\large \refname}\par
+    \vspace{0.45em}%
+    \list{}{%
+      \setlength{\labelwidth}{0pt}%
+      \setlength{\leftmargin}{1.6em}%
+      \setlength{\itemindent}{-1.6em}%
+      \setlength{\itemsep}{0.25em}%
+      \setlength{\parsep}{0pt}%
+    }%
+    \def\newblock{\hskip .11em plus .33em minus -.07em}%
+    \sloppy
+    \clubpenalty4000\widowpenalty4000
+    \sfcode`\.=1000\relax
+  }%
+  \let\endthebibliography\endlist
+}
 
 \endinput
