@@ -39,7 +39,14 @@ git clone https://github.com/Hepisces/ucas-latex-homework.git
 % !BIB program = bibtex
 ```
 
-只有第一行时，Workshop 只运行一次 XeLaTeX，不会生成 `.bbl`。日志里会出现 `No file main.bbl` 和 `Citation ... undefined`，正文引用和文末「参考文献」都是空的。两行都在时，编译链是 XeLaTeX、BibTeX、XeLaTeX、XeLaTeX。当前用户配置里对应的配方名是 `xelatex -> bibtex -> xelatex*2`。
+只有第一行时，Workshop 只运行一次 XeLaTeX，不会生成 `.bbl`。日志里会出现 `No file main.bbl` 和 `Citation ... undefined`。两行都在时，编译链是 XeLaTeX、BibTeX、XeLaTeX、XeLaTeX。BibTeX 只要发现文中没有 `\citation` 或 `\bibdata`，就会以退出码 2 结束；Workshop 把非 0 退出码当成失败，于是整次编译被中断。因此使用第二行时，文末需要：
+
+```latex
+\nocite{*}
+\bibliography{ref}
+```
+
+没有条目可引用、又不想跑 BibTeX 时，删去 `% !BIB program = bibtex`，只保留第一行。当前用户配置里带 BibTeX 的配方名是 `xelatex -> bibtex -> xelatex*2`。
 
 `make` 只作辅助，它调用 `latexmk -xelatex`，同样会在需要时跑 BibTeX。上传到 [Overleaf](https://www.overleaf.com) 时，编译器选择 XeLaTeX。
 
