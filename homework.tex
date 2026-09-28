@@ -12,21 +12,68 @@
 \maketitle
 
 \question\label{q:use}
-本模板在 \href{https://github.com/jez/latex-homework-class}{\texttt{homework}} 类的题目接口上改为中文，版式取自国科大大作业模板：A4、小四、页边距 $2.5\,\mathrm{cm}$。页眉为课程与作业序号，默认每页带校徽水印。
+\begin{problem}
+说明本模板的页面、题号和公式写法。
 
-个人信息写在导言区的 \verb|\hwname|、\verb|\hwid|、\verb|\hwclass| 等命令中。行内公式 $v-\varepsilon+\phi=2$，编号公式见\autoref{eq:euler}。
+本模板在 \href{https://github.com/jez/latex-homework-class}{\texttt{homework}} 类的题目接口上改为中文。页面为 A4、小四，页边距 $2.5\,\mathrm{cm}$。\verb|\question| 依次生成「题目 1」「题目 2」。题面放在 \texttt{problem} 中，题解从 \verb|\solution| 之后书写。
+
+行内公式 $v-\varepsilon+\phi=2$。编号公式见\autoref{eq:euler}。
+\end{problem}
+\solution
+个人信息写在导言区的 \verb|\hwname|、\verb|\hwid|、\verb|\hwclass| 等命令中。
 
 \begin{equation}
   v-\varepsilon+\phi=2
   \label{eq:euler}
 \end{equation}
 
-\question*{归纳：等差数列求和}\label{q:ind}
+\question\label{q:table}
+\begin{problem}
+用三线表列出模板中参与编译的文件。不要使用浮动的 \texttt{table}，也不要加竖线。
+
+\begin{threetab}{ll}
+文件 & 作用 \\
+\midrule
+\texttt{homework.cls} & 文档类 \\
+\texttt{main.tex} & 作业正文 \\
+\texttt{ref.bib} & 参考文献条目 \\
+\texttt{acl\_natbib.bst} & ACL 参考文献样式 \\
+\texttt{figures/} & 校徽与水印 \\
+\end{threetab}
+\end{problem}
+\solution
+浮动图表仍可放在题解中，例如\autoref{tab:files}与校徽\autoref{fig:logo}。
+
+\begin{table}[!htbp]
+  \centering
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    文件 & 作用 \\
+    \midrule
+    \texttt{homework.cls} & 文档类 \\
+    \texttt{main.tex} & 作业正文 \\
+    \texttt{ref.bib} & 参考文献条目 \\
+    \bottomrule
+  \end{tabular}
+  \caption{模板文件}
+  \label{tab:files}
+\end{table}
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.46\textwidth]{ucas_logo.pdf}
+  \caption{中国科学院大学}
+  \label{fig:logo}
+\end{figure}
+
+\question\label{q:ind}
+\begin{problem}
 证明对任意正整数 $n$，
 \[
   \sum_{i=1}^{n} i = \frac{n(n+1)}{2}.
 \]
-
+\end{problem}
+\solution
 \begin{induction}
   \basecase
   当 $n=1$ 时，左边为 $1$，右边为 $1$，等式成立。
@@ -44,21 +91,14 @@
 因此命题对所有正整数成立。本题编号为第\ref{q:ind}题。
 
 \question
-\verb|arabicparts| 的小问带当前题号。
-\begin{arabicparts}
-  \questionpart
-  时间复杂度记为 $T(n)$。
-  \questionpart
-  证明 $T(n)=O(n\log n)$。
-\end{arabicparts}
+\begin{problem}
+小问有两种编号。\texttt{alphaparts} 用字母，同一题内分段书写时连续编号。\texttt{arabicparts} 带当前题号。
 
-\question
-\verb|alphaparts| 使用字母编号。同一题里分两段书写时，编号连续。
 \begin{alphaparts}
   \questionpart
   打开终端。
   \questionpart
-  执行 \texttt{xelatex homework.tex}。
+  执行 \texttt{xelatex main.tex}。
 \end{alphaparts}
 
 中间可以插入说明，再继续小问：
@@ -68,72 +108,25 @@
   检查页眉、水印和题号。
 \end{alphaparts}
 
-嵌套列举仍然可用。
-\begin{alphaparts}
+\begin{arabicparts}
   \questionpart
-  编译顺序
-  \begin{enumerate}
-    \item \texttt{xelatex}
-    \item 若加入参考文献，再跑 \texttt{bibtex}，然后 \texttt{xelatex} 两遍
-  \end{enumerate}
+  时间复杂度记为 $T(n)$。
   \questionpart
-  或直接 \texttt{make}。
-\end{alphaparts}
-
-\renewcommand{\questiontype}{练习}
-\question
-\verb|\renewcommand{\questiontype}{练习}| 只改变编号题的前缀，这里是「练习」而不是「题目」。
-
-\renewcommand{\questiontype}{题目}
-
-\setcounter{questionCounter}{9}
-\question
-\verb|\setcounter{questionCounter}{9}| 使下一题从 10 开始。
-
-\section
-无星号的 \verb|\section| 与 \verb|\question| 相同，适合从 Markdown 转来的稿件。
-
-\section*{使用 section 星号}
-\verb|\section*{标题}| 与 \verb|\question*{标题}| 相同。
+  证明 $T(n)=O(n\log n)$。
+\end{arabicparts}
+\end{problem}
+\solution
+嵌套列举写在对应小问下。
+\begin{enumerate}
+  \item \texttt{xelatex}
+  \item 若加入参考文献，再跑 \texttt{bibtex}，然后 \texttt{xelatex} 两遍
+\end{enumerate}
 
 \question
-代码、表格、图片、定理和作答框。
-
-\begin{lstlisting}[language=Python]
-def prefix_sum(values):
-    total = 0
-    output = []
-    for value in values:
-        total += value
-        output.append(total)
-    return output
-\end{lstlisting}
-
-\begin{table}[!htbp]
-  \centering
-  \begin{tabular}{@{}ll@{}}
-    \toprule
-    文件 & 作用 \\
-    \midrule
-    \texttt{homework.cls} & 文档类 \\
-    \texttt{main.tex} & 空白起点 \\
-    \texttt{homework.tex} & 本示例 \\
-    \texttt{figures/} & 校徽 \\
-    \bottomrule
-  \end{tabular}
-  \caption{模板文件}
-  \label{tab:files}
-\end{table}
-
-\autoref{tab:files}给出文件组成。校徽见\autoref{fig:logo}。
-
-\begin{figure}[!htbp]
-  \centering
-  \includegraphics[width=0.46\textwidth]{ucas_logo.pdf}
-  \caption{中国科学院大学}
-  \label{fig:logo}
-\end{figure}
-
+\begin{problem}
+给出 $O(n)$ 对加法封闭的定义，并证明两个 $O(n)$ 函数之和仍为 $O(n)$。题目接口来自 \citep{zimmerman2014homework}。
+\end{problem}
+\solution
 \begin{definition}
   设 $f,g:\mathbb{N}\to\mathbb{R}_{\geq 0}$。若存在常数 $c>0$ 和 $n_0$，使得对所有 $n\geq n_0$ 有 $f(n)\leq c\,g(n)$，则称 $f(n)=O(g(n))$。
 \end{definition}
@@ -146,11 +139,21 @@ def prefix_sum(values):
   取两种上界的常数之和，阈值取两者的较大者。
 \end{proof}
 
-\tbox{默认开启水印。\texttt{\textbackslash documentclass[nowatermark]\{homework\}} 关闭水印，并改为偶数页页眉印姓名、奇数页页眉印校徽。匿名提交使用 \texttt{anonymous}，每题新页使用 \texttt{newpage}。}
+\begin{lstlisting}[language=Python]
+def prefix_sum(values):
+    total = 0
+    output = []
+    for value in values:
+        total += value
+        output.append(total)
+    return output
+\end{lstlisting}
 
-\begin{samepage}
+\tbox{默认开启水印。\texttt{\textbackslash documentclass[nowatermark]\{homework\}} 关闭水印，并改为偶数页页眉印姓名、奇数页页眉印校徽。}
+
 手写作答可留空框：
 \answerbox{2.6cm}
-\end{samepage}
+
+\bibliography{ref}
 
 \end{document}
