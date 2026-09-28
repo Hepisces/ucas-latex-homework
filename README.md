@@ -2,6 +2,16 @@
 
 中文作业文档类。页面为 A4、小四、页边距 2.5 cm。文首放置国科大校徽。默认每页有校徽水印；页眉文字为「课程 · 作业序号」。
 
+## 样例
+
+编译结果为 [homework.pdf](homework.pdf)。下图依次是文首、题目和代码页。
+
+<p align="center">
+  <img src="figures/preview/page-1.png" width="32%" alt="文首" />
+  <img src="figures/preview/page-2.png" width="32%" alt="题目" />
+  <img src="figures/preview/page-3.png" width="32%" alt="代码与定理" />
+</p>
+
 ## 来源与许可
 
 本仓库包含两项彼此独立的授权。
