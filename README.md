@@ -32,15 +32,16 @@ git clone https://github.com/Hepisces/ucas-latex-homework.git
 
 1. 编辑 `main.tex` 顶部的课程、姓名、学号和作业序号。
 2. 每道题用 `\question`。题面写入 `problem`，题解从 `\solution` 之后写。
-3. 编译：
+3. 用 VS Code 的 [LaTeX Workshop](https://github.com/James-Yu/LaTeX-Workshop) 编译。源文件开头要同时有这两行：
 
-```bash
-xelatex main.tex
+```latex
+% !TeX program = xelatex
+% !BIB program = bibtex
 ```
 
-有 `\bibliography{ref}` 时，按 `xelatex`、`bibtex`、`xelatex`、`xelatex` 的顺序编译。`make` 使用 `latexmk`，会处理示例 `homework.tex` 的这几遍。
+只有第一行时，Workshop 只运行一次 XeLaTeX，不会生成 `.bbl`。日志里会出现 `No file main.bbl` 和 `Citation ... undefined`，正文引用和文末「参考文献」都是空的。两行都在时，编译链是 XeLaTeX、BibTeX、XeLaTeX、XeLaTeX。当前用户配置里对应的配方名是 `xelatex -> bibtex -> xelatex*2`。
 
-使用 [LaTeX Workshop](https://github.com/James-Yu/LaTeX-Workshop) 时，把配方设为 XeLaTeX 或 `latexmk`。上传到 [Overleaf](https://www.overleaf.com) 时，编译器同样选择 XeLaTeX。
+`make` 只作辅助，它调用 `latexmk -xelatex`，同样会在需要时跑 BibTeX。上传到 [Overleaf](https://www.overleaf.com) 时，编译器选择 XeLaTeX。
 
 只带走能编译的文件：
 
