@@ -24,6 +24,8 @@ xelatex main.tex
 
 `make` 编译示例 `homework.tex`。使用 [LaTeX Workshop](https://github.com/James-Yu/LaTeX-Workshop) 时，将配方设为 XeLaTeX。上传到 [Overleaf](https://www.overleaf.com) 时同样选择 XeLaTeX。
 
+只带走能编译的文件时运行 `python pack_sources.py`。它把 `main.tex`、`*.cls`、`*.bib` 和 `figures/` 中的校徽打成 `ucas-homework-src.zip`，不包含预览图与 PDF。
+
 ## 样例
 
 ### 有水印
