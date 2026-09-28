@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this template, please cite it together with the two works it adapts."
+title: "UCAS Chinese LaTeX Homework Template"
+type: software
+authors:
+  - family-names: He
+    given-names: Jiawei
+repository-code: "https://github.com/Hepisces/ucas-latex-homework"
+url: "https://github.com/Hepisces/ucas-latex-homework"
+license: MIT
+version: "1.0.0"
+date-released: "2026-09-28"
+references:
+  - type: software
+    title: "latex-homework-class"
+    authors:
+      - family-names: Zimmerman
+        given-names: Jacob
+    year: 2014
+    url: "https://github.com/jez/latex-homework-class"
+    license: MIT
+  - type: software
+    title: "UCAS Latex Template"
+    authors:
+      - name: jweihe
+    url: "https://github.com/jweihe/UCAS_Latex_Template"
+    license: CC-BY-4.0
