@@ -1,0 +1,19 @@
+本仓库的代码与文档以 MIT License 授权，全文见 LICENSE。
+下列文件不在该许可范围内。
+
+figures/ucas_logo.pdf
+figures/ucas_logo.png
+    作者：jweihe
+    作品：国科大课程论文模板
+    来源：https://github.com/jweihe/UCAS_Latex_Template
+    许可：Creative Commons Attribution 4.0 International
+          https://creativecommons.org/licenses/by/4.0/
+    改动：无
+
+figures/ucas_watermark.png
+    作者：jweihe
+    作品：国科大课程论文模板中的校徽
+    来源：https://github.com/jweihe/UCAS_Latex_Template
+    许可：Creative Commons Attribution 4.0 International
+          https://creativecommons.org/licenses/by/4.0/
+    改动：由 figures/ucas_logo.png 降低不透明度得到，图样未改

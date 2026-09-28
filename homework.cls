@@ -1,16 +1,18 @@
 %%
+%% SPDX-License-Identifier: MIT
+%%
 %% 国科大中文平时作业文档类
 %%
 %% 题目接口改写自：
 %%   Jacob Zimmerman, latex-homework-class, 2014.
 %%   https://github.com/jez/latex-homework-class
-%%   MIT License. 本文件保留该许可，见仓库根目录 LICENSE。
+%%   MIT License. 见仓库根目录 LICENSE。
 %%
 %% 版式（A4、小四、页边距 2.5cm）与校徽取自：
 %%   jweihe, 国科大课程论文模板.
 %%   https://github.com/jweihe/UCAS_Latex_Template
 %%   Creative Commons Attribution 4.0 International.
-%%   figures/ucas_watermark.png 由 figures/ucas_logo.png 降低不透明度得到。
+%%   校徽文件的许可与改动见仓库根目录 NOTICE。
 %%
 %% 编译：xelatex
 %%

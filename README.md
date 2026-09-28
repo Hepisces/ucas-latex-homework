@@ -1,42 +1,57 @@
 # 国科大平时作业模板
 
-中文作业文档类。页面为 A4、小四、页边距 2.5 cm。文首放置国科大校徽。默认每页有校徽水印；页眉文字为「课程 · 作业序号」。
+中文 LaTeX 作业文档类。A4、小四、页边距 2.5 cm。文首为国科大校徽，页眉为「课程 · 作业序号」。
+
+## 下载
+
+- [Download ZIP](https://github.com/Hepisces/ucas-latex-homework/archive/refs/heads/main.zip)
+- 或克隆本仓库：
+
+```bash
+git clone https://github.com/Hepisces/ucas-latex-homework.git
+```
+
+## 使用
+
+安装 [TeX Live](https://www.tug.org/texlive/)，编译器使用 XeLaTeX。TeX Live 另带一份同名 [`homework`](https://ctan.org/pkg/homework) 文档类，请在本目录中编译，让仓库内的 `homework.cls` 优先生效。
+
+1. 将 `template.tex` 复制为自己的作业文件，并与 `homework.cls`、`figures/` 放在同一目录。
+2. 修改导言区的课程、姓名和学号。
+3. 编译：
+
+```bash
+xelatex template.tex
+```
+
+`make` 编译示例 `homework.tex`。使用 [LaTeX Workshop](https://github.com/James-Yu/LaTeX-Workshop) 时，将配方设为 XeLaTeX。上传到 [Overleaf](https://www.overleaf.com) 时同样选择 XeLaTeX。
 
 ## 样例
 
-编译结果为 [homework.pdf](homework.pdf)。下图依次是文首、题目和代码页。
+### 有水印
+
+默认版式。正文页带校徽水印，页眉只有「课程 · 作业序号」。
+
+[homework.pdf](homework.pdf)
 
 <p align="center">
-  <img src="figures/preview/page-1.png" width="32%" alt="文首" />
-  <img src="figures/preview/page-2.png" width="32%" alt="题目" />
-  <img src="figures/preview/page-3.png" width="32%" alt="代码与定理" />
+  <img src="figures/preview/watermark-cover.png" width="42%" alt="有水印，文首" />
+  <img src="figures/preview/watermark-body.png" width="42%" alt="有水印，正文" />
 </p>
 
-## 来源与许可
+### 无水印
 
-本仓库包含两项彼此独立的授权。
-
-代码（`homework.cls` 及其余 TeX 源文件）以 [MIT License](LICENSE) 发布。题目接口改写自 Jacob Zimmerman, *latex-homework-class* (2014), <https://github.com/jez/latex-homework-class>，原作为 MIT License。本仓库保留上游版权声明：Copyright (c) 2014 Jacob Zimmerman; Copyright (c) 2026 Jiawei He.
-
-版式与校徽引自 jweihe, 国科大课程论文模板, <https://github.com/jweihe/UCAS_Latex_Template>，该作品以 [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/) 授权。下列文件沿用 CC BY 4.0，不纳入上述 MIT 授权：
-
-| 文件 | 关系 |
-| --- | --- |
-| `figures/ucas_logo.pdf` | 原样收录 |
-| `figures/ucas_logo.png` | 原样收录 |
-| `figures/ucas_watermark.png` | 由 `ucas_logo.png` 降低不透明度得到，图样未改 |
-
-引用本模板时，请同时注明上述两个来源。机器可读的引用信息见 [CITATION.cff](CITATION.cff)。
-
-在本目录编译。TeX Live 另有同名 `homework.cls`，同目录文件优先。
-
-## 编译
-
-```bash
-make
+```latex
+\documentclass[nowatermark]{homework}
 ```
 
-或 `xelatex homework.tex`。日常写作复制 `template.tex`。
+正文无水印。偶数页页眉外侧为姓名，奇数页页眉外侧为校徽，内侧均为「课程 · 作业序号」。文首校徽保留。
+
+[homework-nowatermark.pdf](homework-nowatermark.pdf)
+
+<p align="center">
+  <img src="figures/preview/plain-even.png" width="42%" alt="无水印，偶数页" />
+  <img src="figures/preview/plain-odd.png" width="42%" alt="无水印，奇数页" />
+</p>
 
 ## 导言区
 
@@ -45,10 +60,12 @@ make
 | `\hwclass` | 课程名 |
 | `\hwtype` `\hwnum` | 作业类型与序号 |
 | `\hwname` `\hwid` | 姓名、学号 |
-| `\hwemail` | 邮箱，空则不显示 |
+| `\hwemail` | 邮箱，留空则不显示 |
 | `\hwdate` | 日期，默认当天 |
 
 ## 题目
+
+题目命令沿用 [latex-homework-class](https://github.com/jez/latex-homework-class) 的接口，说明见其 [README](https://github.com/jez/latex-homework-class/blob/master/README.md)。中文示例如下，完整稿见 `homework.tex`。
 
 ```latex
 \question
@@ -62,18 +79,17 @@ make
 \end{induction}
 
 \begin{alphaparts}
-  \questionpart (a)
-  \questionpart (b)
+  \questionpart ...
 \end{alphaparts}
 
 \begin{arabicparts}
-  \questionpart 题号.1
+  \questionpart ...
 \end{arabicparts}
 ```
 
 `\renewcommand{\questiontype}{练习}` 改变编号题前缀。`\setcounter{questionCounter}{9}` 使下一题为第 10 题。`\renewcommand{\writtensection}{5}` 后题号变为 5.1、5.2。`\section` 与 `\question` 等价，`\section*{标题}` 与 `\question*{标题}` 等价。
 
-`\answerbox{4cm}` 留出作答空白。`\tbox{文字}` 为浅灰提示框。定理环境 `theorem`、`lemma`、`corollary`、`proposition`、`definition`、`example` 按题目编号，证明用 `proof`。
+`\answerbox{4cm}` 留出作答空白。`\tbox{文字}` 为浅灰提示框。定理环境为 `theorem`、`lemma`、`corollary`、`proposition`、`definition`、`example`，证明用 `proof`。
 
 ## 选项
 
@@ -81,11 +97,14 @@ make
 \documentclass[anonymous,newpage,largemargins,nowatermark]{homework}
 ```
 
-`anonymous` 把姓名印在单独扉页，正文页眉不印姓名。`newpage` 每题新页。`largemargins` 加宽页边距。
+| 选项 | 作用 |
+| --- | --- |
+| `nowatermark` | 关闭水印，改用双面页眉 |
+| `anonymous` | 姓名、学号只出现在扉页，正文页眉不印姓名 |
+| `newpage` | 每题从新页开始 |
+| `largemargins` | 加宽页边距 |
 
-`nowatermark` 关闭水印。此时文档改为双面页眉：偶数页外侧是姓名，奇数页外侧是校徽，内侧是「课程 · 作业序号」。文首校徽不变。
-
-水印图是淡化后的校徽 `figures/ucas_watermark.png`。需要再叠一行斜向校名时：
+图片放在 `figures/`。水印图为 `figures/ucas_watermark.png`。需要在水印上再叠一行校名时：
 
 ```latex
 \renewcommand{\hwmarktext}{中国科学院大学}
@@ -93,4 +112,10 @@ make
 \renewcommand{\hwtextrotation}{22}
 ```
 
-图片放在 `figures/`。
+## 来源与许可
+
+除 [NOTICE](NOTICE) 所列校徽文件外，本仓库以 [MIT License](LICENSE) 授权。题目接口改写自 Jacob Zimmerman, [*latex-homework-class*](https://github.com/jez/latex-homework-class) (2014)，原许可见该仓库的 [LICENSE](https://github.com/jez/latex-homework-class/blob/master/LICENSE)。
+
+校徽取自 [jweihe, 国科大课程论文模板](https://github.com/jweihe/UCAS_Latex_Template)，按 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) 使用。原文件、衍生文件与改动写在 [NOTICE](NOTICE) 中。
+
+引用信息见 [CITATION.cff](CITATION.cff)。
