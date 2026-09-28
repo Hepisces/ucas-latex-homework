@@ -88,7 +88,7 @@ xelatex main.tex
 \end{arabicparts}
 ```
 
-`\renewcommand{\questiontype}{练习}` 改变编号题前缀。`\setcounter{questionCounter}{9}` 使下一题为第 10 题。`\renewcommand{\writtensection}{5}` 后题号变为 5.1、5.2。`\section` 与 `\question` 等价，`\section*{标题}` 与 `\question*{标题}` 等价。
+`\question` 生成「题目 1」「题目 2」。题面放进 `problem`，题解从 `\solution` 之后写。`problem` 是浅蓝底、校色边框，表用 `threetab` 写在盒子里。
 
 `\answerbox{4cm}` 留出作答空白。`\tbox{文字}` 为浅灰提示框。定理环境为 `theorem`、`lemma`、`corollary`、`proposition`、`definition`、`example`，证明用 `proof`。
 

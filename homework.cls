@@ -146,6 +146,7 @@
 \RequirePackage{fancyvrb}
 \RequirePackage{listings}
 \RequirePackage{tcolorbox}
+\tcbuselibrary{breakable}
 \RequirePackage{eso-pic}
 \RequirePackage{tikz}
 \RequirePackage{fancyhdr}
@@ -458,25 +459,51 @@
   \end{tcolorbox}%
 }
 
+% ----- 题面 -----------------------------------------------------------------
+% problem 把题面放进浅蓝底、校色边框的盒子，和后面的题解分开。
+% 盒子可跨页。threetab 写在盒子内部时按盒子宽度居中，仍是三线表。
+% solution 只标出题解的起点，不生成解答。
+\newenvironment{problem}{%
+  \begin{tcolorbox}[
+    breakable,
+    colback=ucasblue!6,
+    colframe=ucasblue!80!black,
+    colbacktitle=ucasblue!80!black,
+    coltitle=white,
+    fonttitle=\bfseries\heiti,
+    title=题面,
+    title after break=题面,
+    boxrule=0.55pt,
+    arc=1mm,
+    left=2.4mm,
+    right=2.4mm,
+    top=1.4mm,
+    bottom=1.5mm,
+    before skip=0.25em,
+    after skip=0.65em,
+    parbox=false
+  ]%
+}{%
+  \end{tcolorbox}%
+}
+\newcommand{\solution}{%
+  \par\vspace{0.1em}%
+  \noindent{\bfseries\heiti 题解}\par
+}
+
 % ----- 三线表 ---------------------------------------------------------------
 % 题目中的表用 threetab，不进入浮动体，因此不会漂到别的题。
 % 参数是列格式，不要加竖线。表头一行之后写 \midrule。
-% \begin{threetab}{lr}
-%   词项 & 文档频率 \\
-%   \midrule
-%   dragon & 66000 \\
-% \end{threetab}
+% 在 problem 盒子里也可以用，表宽不超过盒子的行宽。
 \newenvironment{threetab}[1]{%
-  \par\addvspace{0.45em}%
-  \noindent\begin{minipage}{\linewidth}%
-  \centering
+  \par\vspace{0.45em}%
+  \begin{center}%
   \begin{tabular}{@{}#1@{}}%
     \toprule
 }{%
     \bottomrule
   \end{tabular}%
-  \end{minipage}%
-  \par\addvspace{0.45em}%
+  \end{center}%
 }
 
 % ----- 代码 -----------------------------------------------------------------
