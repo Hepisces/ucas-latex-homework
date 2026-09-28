@@ -15,12 +15,11 @@ git clone https://github.com/Hepisces/ucas-latex-homework.git
 
 安装 [TeX Live](https://www.tug.org/texlive/)，编译器使用 XeLaTeX。TeX Live 另带一份同名 [`homework`](https://ctan.org/pkg/homework) 文档类，请在本目录中编译，让仓库内的 `homework.cls` 优先生效。
 
-1. 将 `template.tex` 复制为自己的作业文件，并与 `homework.cls`、`figures/` 放在同一目录。
-2. 修改导言区的课程、姓名和学号。
-3. 编译：
+1. 编辑 `main.tex` 中的课程、姓名和学号。`main.tex` 须与 `homework.cls`、`figures/` 放在同一目录。
+2. 编译：
 
 ```bash
-xelatex template.tex
+xelatex main.tex
 ```
 
 `make` 编译示例 `homework.tex`。使用 [LaTeX Workshop](https://github.com/James-Yu/LaTeX-Workshop) 时，将配方设为 XeLaTeX。上传到 [Overleaf](https://www.overleaf.com) 时同样选择 XeLaTeX。

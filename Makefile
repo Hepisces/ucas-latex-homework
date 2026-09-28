@@ -1,6 +1,6 @@
 .PHONY: all clean view
 
-all: homework.pdf template.pdf
+all: homework.pdf main.pdf
 
 %.pdf: %.tex homework.cls
 	latexmk -xelatex -interaction=nonstopmode -halt-on-error -file-line-error $<
