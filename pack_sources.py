@@ -8,6 +8,7 @@ from pathlib import Path
 
 
 SOURCE_GLOBS = ("*.cls", "*.sty", "*.bib", "*.bst", "main.tex")
+PROJECT_FILES = (".vscode/settings.json",)
 FIGURES_DIRNAME = "figures"
 FIGURES_SKIP = {"preview"}
 DEFAULT_ARCHIVE = "ucas-homework-src.zip"
@@ -29,6 +30,11 @@ def collect_sources(root):
     selected = []
     for pattern in SOURCE_GLOBS:
         selected.extend(path for path in root.glob(pattern) if path.is_file())
+
+    for relative in PROJECT_FILES:
+        path = root / relative
+        if path.is_file():
+            selected.append(path)
 
     figures_dir = root / FIGURES_DIRNAME
     if figures_dir.is_dir():
@@ -78,7 +84,7 @@ def parse_args(argv):
         含 root 与 output 的解析结果。
     """
     parser = argparse.ArgumentParser(
-        description="打包 main.tex、cls/sty/bib 与 figures 中的编译资源。"
+        description="打包 main.tex、VS Code 编译配置、cls/sty/bib 与 figures 中的编译资源。"
     )
     parser.add_argument(
         "--root",

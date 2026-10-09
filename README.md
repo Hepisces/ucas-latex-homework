@@ -53,7 +53,7 @@ git clone https://github.com/Hepisces/ucas-latex-homework.git
 python pack_sources.py
 ```
 
-生成的 `ucas-homework-src.zip` 含 `main.tex`、`*.cls`、`*.sty`、`*.bib`、`*.bst`，以及 `figures/` 里除 `preview/` 以外的图片。不含 `homework.tex`、预览图和示例 PDF。
+生成的 `ucas-homework-src.zip` 含 `main.tex`、`.vscode/settings.json`、`*.cls`、`*.sty`、`*.bib`、`*.bst`，以及 `figures/` 里除 `preview/` 以外的图片。不含 `homework.tex`、预览图和示例 PDF。解压后用 VS Code 打开解压目录，仓库提供的 XeLaTeX 配置会随项目一起生效。
 
 ## 导言区
 
