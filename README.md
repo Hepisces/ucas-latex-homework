@@ -25,6 +25,7 @@ git clone https://github.com/Hepisces/ucas-latex-homework.git
 | `figures/` | 文首校徽与水印图 |
 | `figures/preview/` | README 用的页面预览，不参与编译 |
 | `pack_sources.py` | 只打包编译所需文件 |
+| `.vscode/settings.json` | VS Code 的 XeLaTeX 编译配置 |
 
 ## 使用
 
@@ -32,21 +33,17 @@ git clone https://github.com/Hepisces/ucas-latex-homework.git
 
 1. 编辑 `main.tex` 顶部的课程、姓名、学号和作业序号。
 2. 每道题用 `\question`。题面写入 `problem`，题解从 `\solution` 之后写。
-3. 用 VS Code 的 [LaTeX Workshop](https://github.com/James-Yu/LaTeX-Workshop) 编译。源文件开头要同时有这两行：
+3. 在 VS Code 中打开整个模板文件夹，使用 [LaTeX Workshop](https://github.com/James-Yu/LaTeX-Workshop) 编译。仓库中的 `.vscode/settings.json` 默认选择 `latexmk (XeLaTeX, automatic bibliography)` 配方，自动完成 XeLaTeX 多轮编译，并在需要时运行 BibTeX。
+
+工作区配置关闭了魔法注释对配方的切换，默认调用 `/Library/TeX/texbin/latexmk`。这是 macOS 上 MacTeX 的标准路径；使用其他安装路径时，将 `command` 改为本机的 `latexmk` 路径，或在已配置 PATH 时改为 `latexmk`。复制模板到课程目录时，一并复制 `.vscode/settings.json` 到 VS Code 打开的文件夹根目录。
+
+需要参考文献时，在正文中使用 `\cite`、`\citep` 或 `\citet`，并在文末加入：
 
 ```latex
-% !TeX program = xelatex
-% !BIB program = bibtex
-```
-
-只有第一行时，Workshop 只运行一次 XeLaTeX，不会生成 `.bbl`。日志里会出现 `No file main.bbl` 和 `Citation ... undefined`。两行都在时，编译链是 XeLaTeX、BibTeX、XeLaTeX、XeLaTeX。BibTeX 只要发现文中没有 `\citation` 或 `\bibdata`，就会以退出码 2 结束；Workshop 把非 0 退出码当成失败，于是整次编译被中断。因此使用第二行时，文末需要：
-
-```latex
-\nocite{*}
 \bibliography{ref}
 ```
 
-没有条目可引用、又不想跑 BibTeX 时，删去 `% !BIB program = bibtex`，只保留第一行。当前用户配置里带 BibTeX 的配方名是 `xelatex -> bibtex -> xelatex*2`。
+要列出 `ref.bib` 中的全部条目，可在前面加上 `\nocite{*}`。没有参考文献时，删除文末的 `\nocite{*}` 和 `\bibliography{ref}`，`latexmk` 会自动跳过 BibTeX。
 
 `make` 只作辅助，它调用 `latexmk -xelatex`，同样会在需要时跑 BibTeX。上传到 [Overleaf](https://www.overleaf.com) 时，编译器选择 XeLaTeX。
 
