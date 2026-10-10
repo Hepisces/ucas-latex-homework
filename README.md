@@ -95,15 +95,18 @@ python pack_sources.py
 
 ## 样例
 
-直接打开并编译 [main.tex](main.tex)，即可看到全部常用写法：字母小问、独立数字分点、多级小问、三线表和数学归纳证明。文件默认使用 `nowatermark`，可以直接替换示范内容来写作业。
+直接打开并编译 [main.tex](main.tex)，即可看到全部常用写法：字母小问、独立数字分点、多级小问、三线表和数学归纳证明。PDF 中同时排印对应的 LaTeX 源码，便于直接照着修改。文件默认使用 `nowatermark`，可以直接替换示范内容来写作业。
 
 [查看完整无水印 PDF](main.pdf)
 
-<p align="center">
-  <img src="figures/preview/main-1.png" width="32%" alt="字母小问与独立数字分点" />
-  <img src="figures/preview/main-2.png" width="32%" alt="多级小问与交叉引用" />
-  <img src="figures/preview/main-3.png" width="32%" alt="数学归纳证明" />
-</p>
+每组先展示排版效果，再展示同一段实际源码；源码直接从 `main.tex` 读取。
+
+| 内容 | 排版效果 | 对应源码 |
+| --- | --- | --- |
+| 字母小问、数字分点与三线表 | ![效果](figures/preview/main-1.png) | ![源码](figures/preview/main-2.png) |
+| 多级小问与交叉引用 | ![效果](figures/preview/main-3.png) | ![源码](figures/preview/main-4.png) |
+| 数学归纳证明 | ![效果](figures/preview/main-5.png) | ![源码](figures/preview/main-6.png) |
+
 
 ## 题目
 
@@ -177,7 +180,7 @@ python pack_sources.py
 \end{alphaparts}
 ```
 
-`subparts` 应放在已有小问的条目内部，也可接在 `plainparts` 或 `arabicparts` 中。条目后的 `\label` 与 `\ref` 可以引用完整编号。
+`subparts` 应放在已有小问的条目内部，也可接在 `plainparts` 或 `arabicparts` 中。条目后的 `\label` 与 `\ref` 可以引用完整编号。`main.pdf` 中的源码框展示了这些环境的完整调用方式。
 
 归纳证明写在题解中：
 

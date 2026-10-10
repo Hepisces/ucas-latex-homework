@@ -10,6 +10,7 @@
 \begin{document}
 \maketitle
 
+% demo1begin
 \question
 \begin{problem}
 本题展示字母小问和框内三线表。
@@ -42,7 +43,16 @@
   \end{enumerate}
 \end{alphaparts}
 
+% demo1end
+\clearpage
+\noindent{\large\bfseries 题目 1：对应源码}\par
+以下代码与前页效果一致，包含三线表、字母小问、编号重置及两种分点写法。
+\lstinputlisting[language={[LaTeX]TeX},basicstyle=\ttfamily\footnotesize,
+  linerange={demo1begin-demo1end},rangeprefix={\%\ },
+  includerangemarker=false]{\jobname.tex}
+
 \newpage
+% demo2begin
 \question
 \begin{problem}
 本题展示多级小问。下级编号继承当前小问，换到下一小问后重新从 1 开始。
@@ -66,12 +76,22 @@
 \solution
 可用标签引用下级小问：\ref{part:a1}、\ref{part:a11}。
 
+
 % 历史接口保留兼容，新作业优先使用上面的字母小问与独立分点。
 \begin{arabicparts}
 \questionpart 兼容原有“题号.序号”的小问。
 \end{arabicparts}
 
+% demo2end
+\clearpage
+\noindent{\large\bfseries 题目 2：对应源码}\par
+下级小问继承上级编号；标签引用会输出完整的小问编号。
+\lstinputlisting[language={[LaTeX]TeX},basicstyle=\ttfamily\footnotesize,
+  linerange={demo2begin-demo2end},rangeprefix={\%\ },
+  includerangemarker=false]{\jobname.tex}
+
 \newpage
+% demo3begin
 \question
 \begin{problem}
 用数学归纳法证明 $\sum_{i=1}^{n}i=n(n+1)/2$。
@@ -86,6 +106,14 @@
 \sum_{i=1}^{k+1}i=\frac{k(k+1)}2+(k+1)=\frac{(k+1)(k+2)}2.
 \]
 \end{induction}
+
+% demo3end
+\clearpage
+\noindent{\large\bfseries 题目 3：对应源码}\par
+下面使用基础情形、归纳假设和归纳步骤组织证明。
+\lstinputlisting[language={[LaTeX]TeX},basicstyle=\ttfamily\footnotesize,
+  linerange={demo3begin-demo3end},rangeprefix={\%\ },
+  includerangemarker=false]{\jobname.tex}
 
 % 如需参考文献，在正文引用后取消下一行的注释。
 % \bibliography{ref}
