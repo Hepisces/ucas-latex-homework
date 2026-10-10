@@ -9,112 +9,181 @@
 \newcommand{\hwnum}{1}
 \begin{document}
 \maketitle
+本文件按功能展示模板用法。每项先给出排版效果，再给出对应写法。
+\newcommand{\demoheading}[1]{\par\bigskip\noindent{\large\bfseries\heiti #1}\par\medskip}
+\newcommand{\demolabel}[1]{\par\medskip\noindent{\bfseries\heiti #1}\par\smallskip}
+\demoheading{1. 题目、题面与题解}
 
-% demo1begin
+\demolabel{效果}
 \question
 \begin{problem}
-本题展示字母小问和框内三线表。
-\begin{threetab}{ll}
-环境 & 编号形式 \\
-\midrule
-\texttt{alphaparts} & (a)、(b)、(c) \\
-\texttt{plainparts} & 1.、2.、3. \\
-\texttt{subparts} & a.1、a.2、a.1.1 \\
-\end{threetab}
-\begin{alphaparts}
-\questionpart 说明第一小问的处理步骤。
-\questionpart 说明第二小问的处理步骤。
-\end{alphaparts}
+在这里填写题面。
 \end{problem}
 \solution
-% 题解按题面的字母重新编号；同一题内不重置则继续编号。
+在这里填写题解。
+\demolabel{写法}
+\begin{lstlisting}[language={[LaTeX]TeX},basicstyle=\ttfamily\footnotesize,numbers=none]
+\question
+\begin{problem}
+在这里填写题面。
+\end{problem}
+\solution
+在这里填写题解。
+\end{lstlisting}
+\newpage
+\demoheading{2. 字母小问：alphaparts}
+同一题内字母编号连续。题解需要重新从 (a) 开始时，先重置 \texttt{partCounter}。
+\demolabel{效果}
 \setcounter{partCounter}{0}
 \begin{alphaparts}
-\questionpart 在小问内部按 1.、2.、3. 分点，不需要设置 label。
-  \begin{plainparts}
-  \plainpart 整理输入。
-  \plainpart 写出推导。
-  \plainpart 总结结果。
-  \end{plainparts}
-\questionpart 普通 enumerate 和 item 也能直接使用。
-  \begin{enumerate}
-  \item 第一点。
-  \item 第二点。
-  \end{enumerate}
+  \questionpart 第一小问。
+  \questionpart 第二小问。
 \end{alphaparts}
-
-% demo1end
-\clearpage
-\noindent{\large\bfseries 题目 1：对应源码}\par
-以下代码与前页效果一致，包含三线表、字母小问、编号重置及两种分点写法。
-\lstinputlisting[language={[LaTeX]TeX},basicstyle=\ttfamily\footnotesize,
-  linerange={demo1begin-demo1end},rangeprefix={\%\ },
-  includerangemarker=false]{\jobname.tex}
-
-\newpage
-% demo2begin
-\question
-\begin{problem}
-本题展示多级小问。下级编号继承当前小问，换到下一小问后重新从 1 开始。
+\demolabel{写法}
+\begin{lstlisting}[language={[LaTeX]TeX},basicstyle=\ttfamily\footnotesize,numbers=none]
+\setcounter{partCounter}{0}
 \begin{alphaparts}
-\questionpart 第一小问。
-  \begin{subparts}
-  \subpart 第一个下级问题。\label{part:a1}
-    \begin{subparts}
-    \subpart 更深一层的要求。\label{part:a11}
-    \subpart 同层的另一项要求。
-    \end{subparts}
-  \subpart 第二个下级问题。
-  \end{subparts}
-\questionpart 第二小问。
-  \begin{subparts}
-  \subpart 该小问的第一项要求。
-  \subpart 该小问的第二项要求。
-  \end{subparts}
+  \questionpart 第一小问。
+  \questionpart 第二小问。
 \end{alphaparts}
-\end{problem}
-\solution
-可用标签引用下级小问：\ref{part:a1}、\ref{part:a11}。
-
-
-% 历史接口保留兼容，新作业优先使用上面的字母小问与独立分点。
-\begin{arabicparts}
-\questionpart 兼容原有“题号.序号”的小问。
-\end{arabicparts}
-
-% demo2end
-\clearpage
-\noindent{\large\bfseries 题目 2：对应源码}\par
-下级小问继承上级编号；标签引用会输出完整的小问编号。
-\lstinputlisting[language={[LaTeX]TeX},basicstyle=\ttfamily\footnotesize,
-  linerange={demo2begin-demo2end},rangeprefix={\%\ },
-  includerangemarker=false]{\jobname.tex}
-
+\end{lstlisting}
+\demoheading{3. 独立分点：plainparts}
+每次从 1 开始，不带题号；可以放在题解中，也可以嵌入字母小问。
+\demolabel{效果}
+\begin{plainparts}
+  \plainpart 整理输入。
+  \plainpart 展开推导。
+  \plainpart 写出结论。
+\end{plainparts}
+\demolabel{写法}
+\begin{lstlisting}[language={[LaTeX]TeX},basicstyle=\ttfamily\footnotesize,numbers=none]
+\begin{plainparts}
+  \plainpart 整理输入。
+  \plainpart 展开推导。
+  \plainpart 写出结论。
+\end{plainparts}
+\end{lstlisting}
 \newpage
-% demo3begin
-\question
+\demoheading{4. 普通列表：enumerate}
+普通列表使用标准的 \texttt{\textbackslash item}，不需要设置编号格式。
+\demolabel{效果}
+\begin{enumerate}
+  \item 第一步。
+  \item 第二步。
+\end{enumerate}
+\demolabel{写法}
+\begin{lstlisting}[language={[LaTeX]TeX},basicstyle=\ttfamily\footnotesize,numbers=none]
+\begin{enumerate}
+  \item 第一步。
+  \item 第二步。
+\end{enumerate}
+\end{lstlisting}
+\demoheading{5. 在小问中分点作答}
+
+\demolabel{效果}
+\setcounter{partCounter}{0}
+\begin{alphaparts}
+  \questionpart 第一小问的答案：
+    \begin{plainparts}
+      \plainpart 第一步。
+      \plainpart 第二步。
+    \end{plainparts}
+  \questionpart 第二小问的答案。
+\end{alphaparts}
+\demolabel{写法}
+\begin{lstlisting}[language={[LaTeX]TeX},basicstyle=\ttfamily\footnotesize,numbers=none]
+\setcounter{partCounter}{0}
+\begin{alphaparts}
+  \questionpart 第一小问的答案：
+    \begin{plainparts}
+      \plainpart 第一步。
+      \plainpart 第二步。
+    \end{plainparts}
+  \questionpart 第二小问的答案。
+\end{alphaparts}
+\end{lstlisting}
+\newpage
+\demoheading{6. 多级小问：subparts}
+下级编号继承当前小问，支持 a.1、a.2、a.1.1。包括最外层在内，最多四层。
+\demolabel{效果}
+\setcounter{partCounter}{0}
+\begin{alphaparts}
+  \questionpart 第一小问。
+    \begin{subparts}
+      \subpart 第一个下级问题。\label{part:child}
+        \begin{subparts}
+          \subpart 更深一层。
+        \end{subparts}
+      \subpart 第二个下级问题。
+    \end{subparts}
+  \questionpart 第二小问。
+    \begin{subparts}
+      \subpart 重新从 b.1 开始。
+    \end{subparts}
+\end{alphaparts}
+引用下级小问：\ref{part:child}。
+\demolabel{写法}
+\begin{lstlisting}[language={[LaTeX]TeX},basicstyle=\ttfamily\footnotesize,numbers=none]
+\setcounter{partCounter}{0}
+\begin{alphaparts}
+  \questionpart 第一小问。
+    \begin{subparts}
+      \subpart 第一个下级问题。\label{part:child}
+        \begin{subparts}
+          \subpart 更深一层。
+        \end{subparts}
+      \subpart 第二个下级问题。
+    \end{subparts}
+  \questionpart 第二小问。
+    \begin{subparts}
+      \subpart 重新从 b.1 开始。
+    \end{subparts}
+\end{alphaparts}
+引用下级小问：\ref{part:child}。
+\end{lstlisting}
+\newpage
+\demoheading{7. 题面里的三线表：threetab}
+列格式不加竖线，表头后用 \texttt{\textbackslash midrule}；顶线和底线由环境生成。
+\demolabel{效果}
 \begin{problem}
-用数学归纳法证明 $\sum_{i=1}^{n}i=n(n+1)/2$。
+下表列出输入数据。
+\begin{threetab}{lr}
+项目 & 数量 \\
+\midrule
+甲 & 10 \\
+乙 & 20 \\
+\end{threetab}
 \end{problem}
-\solution
-% induction 是归纳证明环境，三个命令分别标出基础、假设和归纳步骤。
+\demolabel{写法}
+\begin{lstlisting}[language={[LaTeX]TeX},basicstyle=\ttfamily\footnotesize,numbers=none]
+\begin{problem}
+下表列出输入数据。
+\begin{threetab}{lr}
+项目 & 数量 \\
+\midrule
+甲 & 10 \\
+乙 & 20 \\
+\end{threetab}
+\end{problem}
+\end{lstlisting}
+\newpage
+\demoheading{8. 数学归纳证明：induction}
+
+\demolabel{效果}
 \begin{induction}
-\basecase 当 $n=1$ 时，两边均为 $1$。
-\indhyp 假设 $n=k$ 时，$\sum_{i=1}^{k}i=k(k+1)/2$。
-\indstep 当 $n=k+1$ 时，
-\[
-\sum_{i=1}^{k+1}i=\frac{k(k+1)}2+(k+1)=\frac{(k+1)(k+2)}2.
-\]
+  \basecase 当 $n=1$ 时，等式成立。
+  \indhyp 假设 $n=k$ 时等式成立。
+  \indstep 利用假设推导 $n=k+1$ 的情形。
 \end{induction}
+\demolabel{写法}
+\begin{lstlisting}[language={[LaTeX]TeX},basicstyle=\ttfamily\footnotesize,numbers=none]
+\begin{induction}
+  \basecase 当 $n=1$ 时，等式成立。
+  \indhyp 假设 $n=k$ 时等式成立。
+  \indstep 利用假设推导 $n=k+1$ 的情形。
+\end{induction}
+\end{lstlisting}
 
-% demo3end
-\clearpage
-\noindent{\large\bfseries 题目 3：对应源码}\par
-下面使用基础情形、归纳假设和归纳步骤组织证明。
-\lstinputlisting[language={[LaTeX]TeX},basicstyle=\ttfamily\footnotesize,
-  linerange={demo3begin-demo3end},rangeprefix={\%\ },
-  includerangemarker=false]{\jobname.tex}
-
-% 如需参考文献，在正文引用后取消下一行的注释。
+% 有引用时，在正文使用 \citep 或 \citet，再启用文末参考文献。
 % \bibliography{ref}
 \end{document}

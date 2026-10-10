@@ -95,18 +95,13 @@ python pack_sources.py
 
 ## 样例
 
-直接打开并编译 [main.tex](main.tex)，即可看到全部常用写法：字母小问、独立数字分点、多级小问、三线表和数学归纳证明。PDF 中同时排印对应的 LaTeX 源码，便于直接照着修改。文件默认使用 `nowatermark`，可以直接替换示范内容来写作业。
+直接打开 [main.pdf](main.pdf) 查看使用说明，或编译 [main.tex](main.tex)。每项功能按“效果—写法”排列：先展示实际排版，紧接着给出可复制的最小源码。
 
-[查看完整无水印 PDF](main.pdf)
+内容包括题面与题解、字母小问、独立数字分点、普通列表、嵌套作答、多级小问、三线表和归纳证明。默认使用 `nowatermark`。写自己的作业时，选用对应代码并替换内容即可。
 
-每组先展示排版效果，再展示同一段实际源码；源码直接从 `main.tex` 读取。
-
-| 内容 | 排版效果 | 对应源码 |
+| 字母小问与独立分点 | 普通列表与嵌套作答 | 多级小问 |
 | --- | --- | --- |
-| 字母小问、数字分点与三线表 | ![效果](figures/preview/main-1.png) | ![源码](figures/preview/main-2.png) |
-| 多级小问与交叉引用 | ![效果](figures/preview/main-3.png) | ![源码](figures/preview/main-4.png) |
-| 数学归纳证明 | ![效果](figures/preview/main-5.png) | ![源码](figures/preview/main-6.png) |
-
+| ![效果和写法](figures/preview/main-2.png) | ![效果和写法](figures/preview/main-3.png) | ![效果和写法](figures/preview/main-4.png) |
 
 ## 题目
 
