@@ -19,7 +19,7 @@ git clone https://github.com/Hepisces/ucas-latex-homework.git
 | --- | --- |
 | `homework.cls` | 文档类 |
 | `main.tex` | 作业起点，复制或直接改这份 |
-| `homework.tex` | 功能示例，对应下面的两份 PDF |
+| `homework.tex` | 历史扩展示例，常用写法直接见 `main.tex` |
 | `ref.bib` | 参考文献条目 |
 | `acl_natbib.bst` | ACL 参考文献样式 |
 | `figures/` | 文首校徽与水印图 |
@@ -95,26 +95,14 @@ python pack_sources.py
 
 ## 样例
 
-示例源文件是 `homework.tex`。两份 PDF 用同一份源文件，只差有没有水印。
+直接打开并编译 [main.tex](main.tex)，即可看到全部常用写法：字母小问、独立数字分点、多级小问、三线表和数学归纳证明。文件默认使用 `nowatermark`，可以直接替换示范内容来写作业。
 
-### 有水印
-
-[homework.pdf](homework.pdf)
+[查看完整无水印 PDF](main.pdf)
 
 <p align="center">
-  <img src="figures/preview/watermark-cover.png" width="42%" alt="有水印，文首与题目 1" />
-  <img src="figures/preview/watermark-body.png" width="42%" alt="有水印，后续题目" />
-</p>
-
-### 无水印
-
-[homework-nowatermark.pdf](homework-nowatermark.pdf)
-
-偶数页页眉外侧为姓名，奇数页页眉外侧为校徽。
-
-<p align="center">
-  <img src="figures/preview/plain-even.png" width="42%" alt="无水印，偶数页" />
-  <img src="figures/preview/plain-odd.png" width="42%" alt="无水印，奇数页" />
+  <img src="figures/preview/main-1.png" width="32%" alt="字母小问与独立数字分点" />
+  <img src="figures/preview/main-2.png" width="32%" alt="多级小问与交叉引用" />
+  <img src="figures/preview/main-3.png" width="32%" alt="数学归纳证明" />
 </p>
 
 ## 题目
@@ -155,7 +143,41 @@ python pack_sources.py
 \end{arabicparts}
 ```
 
-同一题里多次使用 `alphaparts` 时，字母连续编号。`arabicparts` 带当前题号。
+`\questionpart` 是 `\item` 的别名，具体编号由列表环境决定。`alphaparts` 显示 `(a)`、`(b)`，同一题内多次使用时连续编号。题面之后要从 `(a)` 开始作答，在题解的列表前写 `\setcounter{partCounter}{0}`。
+
+### 独立数字分点
+
+`plainparts` 每次从 `1.` 开始，不附加题号，也不改变外层字母小问的编号。可以直接放在 `\solution` 后，也可以嵌入字母小问：
+
+```latex
+\begin{plainparts}
+  \plainpart 第一步。
+  \plainpart 第二步。
+  \plainpart 第三步。
+\end{plainparts}
+```
+
+普通 `\begin{enumerate}` 配合 `\item` 也默认显示 `1.`、`2.`、`3.`，无需填写 `label`。原来的 `arabicparts` 保留兼容，仍显示题号加序号，新文档优先使用字母小问和独立分点。
+
+### 继承上级编号
+
+在 `alphaparts` 中使用 `subparts` 和 `\subpart`，得到 `a.1`、`a.2`；在其中继续嵌套，得到 `a.1.1`、`a.1.2`。切换到 `(b)` 后，下级从 `b.1` 开始。包括外层在内最多四级。
+
+```latex
+\begin{alphaparts}
+  \questionpart 第一小问。
+    \begin{subparts}
+      \subpart 第一项要求。
+        \begin{subparts}
+          \subpart 更深一层的要求。
+        \end{subparts}
+      \subpart 第二项要求。
+    \end{subparts}
+  \questionpart 第二小问。
+\end{alphaparts}
+```
+
+`subparts` 应放在已有小问的条目内部，也可接在 `plainparts` 或 `arabicparts` 中。条目后的 `\label` 与 `\ref` 可以引用完整编号。
 
 归纳证明写在题解中：
 
@@ -169,7 +191,7 @@ python pack_sources.py
 
 `\answerbox{4cm}` 留出给定高度的空白。`\tbox{文字}` 是浅灰提示框。定理环境为 `theorem`、`lemma`、`corollary`、`proposition`、`definition`、`example`，证明用 `proof`，编号挂在当前题目下。
 
-这些写法的完整稿在 `homework.tex`。英文原接口见 [latex-homework-class](https://github.com/jez/latex-homework-class) 的 [README](https://github.com/jez/latex-homework-class/blob/master/README.md)。
+这些写法的完整稿在 `main.tex`。英文原接口见 [latex-homework-class](https://github.com/jez/latex-homework-class) 的 [README](https://github.com/jez/latex-homework-class/blob/master/README.md)。
 
 ## 参考文献
 

@@ -1,26 +1,92 @@
 % !TeX program = xelatex
-% 作业起点。完整命令示例见 homework.tex。
-% 在本目录编译，以使用同目录的 homework.cls，而不是 TeX Live 自带的同名类。
-\documentclass{homework}
-
+% 直接编译本文件即可查看常用写法；替换题面和题解开始自己的作业。
+\documentclass[nowatermark]{homework}
 \newcommand{\hwname}{XXX}
 \newcommand{\hwid}{在此填写学号}
 \newcommand{\hwemail}{}
-\newcommand{\hwclass}{在此填写课程名}
+\newcommand{\hwclass}{示例课程}
 \newcommand{\hwtype}{作业}
 \newcommand{\hwnum}{1}
-% \renewcommand{\hwdate}{2026年9月28日}
-
 \begin{document}
 \maketitle
 
 \question
 \begin{problem}
-在此填写题面。表用 threetab 写在本环境内。
+本题展示字母小问和框内三线表。
+\begin{threetab}{ll}
+环境 & 编号形式 \\
+\midrule
+\texttt{alphaparts} & (a)、(b)、(c) \\
+\texttt{plainparts} & 1.、2.、3. \\
+\texttt{subparts} & a.1、a.2、a.1.1 \\
+\end{threetab}
+\begin{alphaparts}
+\questionpart 说明第一小问的处理步骤。
+\questionpart 说明第二小问的处理步骤。
+\end{alphaparts}
 \end{problem}
 \solution
+% 题解按题面的字母重新编号；同一题内不重置则继续编号。
+\setcounter{partCounter}{0}
+\begin{alphaparts}
+\questionpart 在小问内部按 1.、2.、3. 分点，不需要设置 label。
+  \begin{plainparts}
+  \plainpart 整理输入。
+  \plainpart 写出推导。
+  \plainpart 总结结果。
+  \end{plainparts}
+\questionpart 普通 enumerate 和 item 也能直接使用。
+  \begin{enumerate}
+  \item 第一点。
+  \item 第二点。
+  \end{enumerate}
+\end{alphaparts}
 
-\clearpage
-\nocite{*}
-\bibliography{ref}
+\newpage
+\question
+\begin{problem}
+本题展示多级小问。下级编号继承当前小问，换到下一小问后重新从 1 开始。
+\begin{alphaparts}
+\questionpart 第一小问。
+  \begin{subparts}
+  \subpart 第一个下级问题。\label{part:a1}
+    \begin{subparts}
+    \subpart 更深一层的要求。\label{part:a11}
+    \subpart 同层的另一项要求。
+    \end{subparts}
+  \subpart 第二个下级问题。
+  \end{subparts}
+\questionpart 第二小问。
+  \begin{subparts}
+  \subpart 该小问的第一项要求。
+  \subpart 该小问的第二项要求。
+  \end{subparts}
+\end{alphaparts}
+\end{problem}
+\solution
+可用标签引用下级小问：\ref{part:a1}、\ref{part:a11}。
+
+% 历史接口保留兼容，新作业优先使用上面的字母小问与独立分点。
+\begin{arabicparts}
+\questionpart 兼容原有“题号.序号”的小问。
+\end{arabicparts}
+
+\newpage
+\question
+\begin{problem}
+用数学归纳法证明 $\sum_{i=1}^{n}i=n(n+1)/2$。
+\end{problem}
+\solution
+% induction 是归纳证明环境，三个命令分别标出基础、假设和归纳步骤。
+\begin{induction}
+\basecase 当 $n=1$ 时，两边均为 $1$。
+\indhyp 假设 $n=k$ 时，$\sum_{i=1}^{k}i=k(k+1)/2$。
+\indstep 当 $n=k+1$ 时，
+\[
+\sum_{i=1}^{k+1}i=\frac{k(k+1)}2+(k+1)=\frac{(k+1)(k+2)}2.
+\]
+\end{induction}
+
+% 如需参考文献，在正文引用后取消下一行的注释。
+% \bibliography{ref}
 \end{document}

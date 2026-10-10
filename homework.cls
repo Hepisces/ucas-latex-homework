@@ -363,8 +363,13 @@
 %   小问标记为 (a) (b) (c)。同一题内多次使用时连续编号。
 % \begin{arabicparts} ... \questionpart ... \end{arabicparts}
 %   小问标记为「题号.序号」，例如 2.1、2.2。
+% \begin{plainparts} ... \plainpart ... \end{plainparts}
+%   题解中的无题号分点，标记为 1. 2. 3.。
+% \begin{subparts} ... \subpart ... \end{subparts}
+%   alphaparts 内的下级小问，标记为 a.1、a.2。
 % \questionpart 后直接写该小问的解答。
 \newenvironment{alphaparts}{%
+  \def\hw@partpath{\alph{\@enumctr}}%
   \begin{enumerate}[
     label=\textbf{(\alph*)},
     ref=(\alph*),
@@ -380,6 +385,7 @@
 }
 
 \newenvironment{arabicparts}{%
+  \def\hw@partpath{\arabic{questionCounter}.\arabic{\@enumctr}}%
   \begin{enumerate}[
     label=\textbf{\arabic{questionCounter}.\arabic*},
     ref=\arabic{questionCounter}.\arabic*,
@@ -396,6 +402,38 @@
 
 \newcommand{\questionpart}{\item}
 
+\newenvironment{plainparts}{%
+  \def\hw@partpath{\arabic{\@enumctr}}%
+  \begin{enumerate}[
+    label=\textbf{\arabic*.},
+    ref=\arabic*,
+    leftmargin=2.2em,
+    itemsep=0.35em,
+    topsep=0.45em,
+    parsep=0pt
+  ]%
+}{%
+  \end{enumerate}%
+}
+\newcommand{\plainpart}{\item}
+
+\newenvironment{subparts}{%
+  \edef\hw@parentpath{\hw@partpath}%
+  \def\hw@partpath{\hw@parentpath.\arabic{\@enumctr}}%
+  \begin{enumerate}[
+    label=\textbf{\hw@parentpath.\arabic*.},
+    ref=\hw@parentpath.\arabic*,
+    leftmargin=2.8em,
+    itemsep=0.3em,
+    topsep=0.35em,
+    parsep=0pt
+  ]%
+}{%
+  \end{enumerate}%
+}
+\newcommand{\subpart}{\item}
+
+\setlist[enumerate]{label=\textbf{\arabic*.},ref=\arabic*,leftmargin=*}
 \setlist{itemsep=0.25em, topsep=0.35em, parsep=0pt, partopsep=0pt}
 
 % ----- 归纳证明 -------------------------------------------------------------
